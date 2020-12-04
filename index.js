@@ -33,7 +33,7 @@ for (let i = 0; i < skuGroupCount; i++) {
 for (let i = 0; i < ROW_COUNT; i++) {
 	row = [];
 	row["sku_code"] = nextSku();
-	row["group_sku"] = skuGroups[Math.max(1, Math.floor(Math.random() * skuGroups.length - 1))];
+	row["group_sku"] = skuGroups[Math.max(0, Math.floor(Math.random() * skuGroups.length))];
 	row["title"] = faker.commerce.productName();
 	row["description"] = faker.lorem.paragraph();
 	row["price"] = faker.commerce.price(20, 200);
@@ -72,7 +72,7 @@ function createCategory(depth = 0) {
 function createImages(depth = 0) {
 	let image = faker.internet.url();
 	if (Math.random() > ANOTHER_IMAGE_CHANCE && depth < ANOTHER_IMAGE_MAX_DEPTH) {
-		image += "|" + createCategory(depth + 1)
+		image += "|" + createImages(depth + 1)
 	}
 	return image;
 }
